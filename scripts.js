@@ -1,6 +1,7 @@
 $(document).ready(function() {
   loadQuotes();
-  loadVideos();
+  loadVideos('popular-tutorials');
+  loadVideos('latest-videos');
 })
 
 function loadQuotes() {
@@ -43,12 +44,12 @@ function placeQuotes(data) {
     </a>`)
 }
 
-function loadVideos() {
+function loadVideos(videoType) {
   $.ajax({
-    url: 'https://smileschool-api.hbtn.info/popular-tutorials',
+    url: `https://smileschool-api.hbtn.info/${videoType}`,
     method: 'get',
     success: function(response) {
-      placeVideos(response);
+      placeVideos(response, videoType);
     },
     error: function() {
       alert('error loading videos');
@@ -56,41 +57,40 @@ function loadVideos() {
   })
 }
 
-function placeVideos(data) {
-  console.log(data);
-  for (tutorial of data) {
-    $('#popular .carousel-inner').append(`
+function placeVideos(data, videoType) {
+  for (video of data) {
+    $(`#${videoType} .carousel-inner`).append(`
       <div class="carousel-item col-12 col-sm-6 col-md-3 col-lg-3">
         <div class="card">
-          <img src="${tutorial.thumb_url}" class="bg-img card-img-top" alt="thumbnail" />
+          <img src="${video.thumb_url}" class="bg-img card-img-top" alt="thumbnail" />
           <div class="card-body">
-            <h5>${tutorial.title}</h5>
-            <p>${tutorial['sub-title']}</p>
+            <h5>${video.title}</h5>
+            <p>${video['sub-title']}</p>
             <div class="row">
-              <img src="${tutorial.author_pic_url}" alt="tiny profile" style="height: 20px;" class="mx-3 rounded-circle">
-              <h6 class="text-light">${tutorial.author}</h6>
+              <img src="${video.author_pic_url}" alt="tiny profile" style="height: 20px;" class="mx-3 rounded-circle">
+              <h6 class="text-light">${video.author}</h6>
             </div>
             <!-- stars -->
             <div class="stars row mx-0">
-              <img src="./images/star_${tutorial.star >= 1 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <img src="./images/star_${tutorial.star >= 2 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <img src="./images/star_${tutorial.star >= 3 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <img src="./images/star_${tutorial.star >= 4 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <img src="./images/star_${tutorial.star >= 5 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <h6 class="text-light ml-auto">${tutorial.duration}</h6>
+              <img src="./images/star_${video.star >= 1 ? 'on' : 'off'}.png" height="15px" width="15px">
+              <img src="./images/star_${video.star >= 2 ? 'on' : 'off'}.png" height="15px" width="15px">
+              <img src="./images/star_${video.star >= 3 ? 'on' : 'off'}.png" height="15px" width="15px">
+              <img src="./images/star_${video.star >= 4 ? 'on' : 'off'}.png" height="15px" width="15px">
+              <img src="./images/star_${video.star >= 5 ? 'on' : 'off'}.png" height="15px" width="15px">
+              <h6 class="text-light ml-auto">${video.duration}</h6>
             </div>
           </div>
         </div>
       </div>`);
     }
-    $('#popular .loading').remove();
-    $('#popular .carousel-item').first().addClass('active');
-    $('#popular').append(`
-    <a class="carousel-control-prev" href="#popular" role="button" data-slide="prev">
+    $(`#${videoType} .loading`).remove();
+    $(`#${videoType} .carousel-item`).first().addClass('active');
+    $(`#${videoType}`).append(`
+    <a class="carousel-control-prev" href="#${videoType}" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon black"></span>
       <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#popular" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#${videoType}" role="button" data-slide="next">
       <span class="carousel-control-next-icon black"></span>
       <span class="sr-only">Next</span>
     </a>`);
