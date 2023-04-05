@@ -113,14 +113,14 @@ function placeVideos(data, videoType) {
 }
 
 function getCourses() {
-  console.log($("#sort_by").val());
+  console.log($("#topic").text());
   $.ajax({
     url: "https://smileschool-api.hbtn.info/courses",
     method: "GET",
     data: {
       q: $("#search_value").val(),
-      topic: $("#topic").val(),
-      sort: $("#sort_by").val(),
+      topic: $("#topic").text(),
+      sort: snakeCase($("#sort_by").text()),
     },
     success: function (response) {
       console.log(response);
@@ -196,14 +196,12 @@ function addListeners() {
 function setTopic(text) {
   $("#courses").empty();
   $("#topic").text(text);
-  $("#topic").val(snakeCase(text));
   getCourses();
 }
 
 function setSort(text) {
   $("#courses").empty();
   $("#sort_by").text(text);
-  $("#sort_by").val(snakeCase(text));
   getCourses();
 }
 
