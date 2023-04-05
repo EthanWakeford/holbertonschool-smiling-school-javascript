@@ -105,7 +105,7 @@ function getCourses() {
     method: 'GET',
     data: {
       q: $('#search_value').val(),
-      topic: 'novice',
+      topic: $('#topic').text(),
       sort: $('#sort_by').text()
     },
     success: function(response) {
@@ -152,16 +152,26 @@ function createCourses(courses) {
 
 function addListeners() {
   $('#topic_container a').click(function() {
-    console.log(this.text)
     setTopic(this.text);
-  })
+  });
+
+  $('#sort_by_container a').click(function() {
+    setSort(this.text);
+  });
+
   $('#search_value').change(function() {
     $('#courses').empty();
     getCourses();
-  })
+  });
+
 }
 
 function setTopic(text) {
-  console.log(text);
-  $('#topic').text(`${text}`)
+  $('#topic').text(text);
+  getCourses();
+}
+
+function setSort(text) {
+  $('#sort_by').text(text);
+  getCourses();
 }
