@@ -1,27 +1,27 @@
-$(document).ready(function() {
+$(document).ready(function () {
   loadQuotes();
-  loadVideos('popular-tutorials');
-  loadVideos('latest-videos');
+  loadVideos("popular-tutorials");
+  loadVideos("latest-videos");
   getCourses();
   addListeners();
-})
+});
 
 function loadQuotes() {
   $.ajax({
-    url: 'https://smileschool-api.hbtn.info/quotes',
-    method: 'get',
-    success: function(response) {
+    url: "https://smileschool-api.hbtn.info/quotes",
+    method: "get",
+    success: function (response) {
       placeQuotes(response);
     },
-    error: function() {
-      alert('Quotes failed to load');
-    }
-  })
+    error: function () {
+      alert("Quotes failed to load");
+    },
+  });
 }
 
 function placeQuotes(data) {
   for (quote of data) {
-    $('.quotes .carousel-inner').append(`
+    $(".quotes .carousel-inner").append(`
     <div class="carousel-item">
       <div class="d-flex flex-sm-row flex-column justify-content-center align-items-center px-3">
         <img src="${quote.pic_url}" alt="" class="mr-sm-5 mb-3 d-block rounded-circle img-fluid" width="150px">
@@ -31,11 +31,11 @@ function placeQuotes(data) {
           <p class="font-italic">${quote.title}</p>
         </div>
       </div>
-    </div>`)
+    </div>`);
   }
-  $('.quotes .loading').remove();
-  $('.quotes .carousel-item').first().addClass('active');
-  $('.quotes').append(`
+  $(".quotes .loading").remove();
+  $(".quotes .carousel-item").first().addClass("active");
+  $(".quotes").append(`
     <a class="carousel-control-prev" href="#blah" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon white"></span>
       <span class="sr-only">Previous</span>
@@ -43,20 +43,20 @@ function placeQuotes(data) {
     <a class="carousel-control-next" href="#blah" role="button" data-slide="next">
       <span class="carousel-control-next-icon white"></span>
       <span class="sr-only">Next</span>
-    </a>`)
+    </a>`);
 }
 
 function loadVideos(videoType) {
   $.ajax({
     url: `https://smileschool-api.hbtn.info/${videoType}`,
-    method: 'get',
-    success: function(response) {
+    method: "get",
+    success: function (response) {
       placeVideos(response, videoType);
     },
-    error: function() {
-      alert('error loading videos');
-    }
-  })
+    error: function () {
+      alert("error loading videos");
+    },
+  });
 }
 
 function placeVideos(data, videoType) {
@@ -64,30 +64,44 @@ function placeVideos(data, videoType) {
     $(`#${videoType} .carousel-inner`).append(`
       <div class="carousel-item col-12 col-sm-6 col-md-3 col-lg-3">
         <div class="card">
-          <img src="${video.thumb_url}" class="bg-img card-img-top" alt="thumbnail" />
+          <img src="${
+            video.thumb_url
+          }" class="bg-img card-img-top" alt="thumbnail" />
           <div class="card-body">
             <h5>${video.title}</h5>
-            <p>${video['sub-title']}</p>
+            <p>${video["sub-title"]}</p>
             <div class="row">
-              <img src="${video.author_pic_url}" alt="tiny profile" style="height: 20px;" class="mx-3 rounded-circle">
+              <img src="${
+                video.author_pic_url
+              }" alt="tiny profile" style="height: 20px;" class="mx-3 rounded-circle">
               <h6 class="text-light">${video.author}</h6>
             </div>
             <!-- stars -->
             <div class="stars row mx-0">
-              <img src="./images/star_${video.star >= 1 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <img src="./images/star_${video.star >= 2 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <img src="./images/star_${video.star >= 3 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <img src="./images/star_${video.star >= 4 ? 'on' : 'off'}.png" height="15px" width="15px">
-              <img src="./images/star_${video.star >= 5 ? 'on' : 'off'}.png" height="15px" width="15px">
+              <img src="./images/star_${
+                video.star >= 1 ? "on" : "off"
+              }.png" height="15px" width="15px">
+              <img src="./images/star_${
+                video.star >= 2 ? "on" : "off"
+              }.png" height="15px" width="15px">
+              <img src="./images/star_${
+                video.star >= 3 ? "on" : "off"
+              }.png" height="15px" width="15px">
+              <img src="./images/star_${
+                video.star >= 4 ? "on" : "off"
+              }.png" height="15px" width="15px">
+              <img src="./images/star_${
+                video.star >= 5 ? "on" : "off"
+              }.png" height="15px" width="15px">
               <h6 class="text-light ml-auto">${video.duration}</h6>
             </div>
           </div>
         </div>
       </div>`);
-    }
-    $(`#${videoType} .loading`).remove();
-    $(`#${videoType} .carousel-item`).first().addClass('active');
-    $(`#${videoType}`).append(`
+  }
+  $(`#${videoType} .loading`).remove();
+  $(`#${videoType} .carousel-item`).first().addClass("active");
+  $(`#${videoType}`).append(`
     <a class="carousel-control-prev" href="#${videoType}" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon black"></span>
       <span class="sr-only">Previous</span>
@@ -99,90 +113,104 @@ function placeVideos(data, videoType) {
 }
 
 function getCourses() {
-  console.log($('#sort_by').val())
+  console.log($("#sort_by").val());
   $.ajax({
-    url: 'https://smileschool-api.hbtn.info/courses',
-    method: 'GET',
+    url: "https://smileschool-api.hbtn.info/courses",
+    method: "GET",
     data: {
-      q: $('#search_value').val(),
-      topic: $('#topic').val(),
-      sort: $('#sort_by').val()
+      q: $("#search_value").val(),
+      topic: $("#topic").val(),
+      sort: $("#sort_by").val(),
     },
-    success: function(response) {
+    success: function (response) {
       console.log(response);
-      createCourses(response.courses)
+      createCourses(response.courses);
     },
-    error: function() {
-      console.log('failed query');
-    }
-  })
+    error: function () {
+      console.log("failed query");
+    },
+  });
 }
 
 function createCourses(courses) {
-  $('#course_count').text(`${courses.length} videos`);
+  $("#course_count").text(`${courses.length} videos`);
   for (let course of courses) {
-    $('#courses').append(`
+    $("#courses").append(`
     <div class="col my-3">
       <div>
         <img class="card-img-top" src="${course.thumb_url}" alt="">
         <img class="card-img-overlay play mx-auto mt-5 p-0" src="images/play.png">
       </div>
       <div class="card-body">
-        <h1 class="card-title lead font-weight-bold text-dark">${course.title}</h1>
-        <p class="card-text text-secondary">${course['sub-title']}</p>
+        <h1 class="card-title lead font-weight-bold text-dark">${
+          course.title
+        }</h1>
+        <p class="card-text text-secondary">${course["sub-title"]}</p>
         <div class="row">
-          <img class="rounded-circle ml-3" src="${course.author_pic_url}" height="25px" width="25px" alt="">
+          <img class="rounded-circle ml-3" src="${
+            course.author_pic_url
+          }" height="25px" width="25px" alt="">
           <p class="ml-3 text-light">${course.author}</p>
         </div>
         <div class="row align-items-center justify-content-between px-4">
           <div class="row">
-          <img src="./images/star_${course.star >= 1 ? 'on' : 'off'}.png" height="15px" width="15px">
-          <img src="./images/star_${course.star >= 2 ? 'on' : 'off'}.png" height="15px" width="15px">
-          <img src="./images/star_${course.star >= 3 ? 'on' : 'off'}.png" height="15px" width="15px">
-          <img src="./images/star_${course.star >= 4 ? 'on' : 'off'}.png" height="15px" width="15px">
-          <img src="./images/star_${course.star >= 5 ? 'on' : 'off'}.png" height="15px" width="15px">
+          <img src="./images/star_${
+            course.star >= 1 ? "on" : "off"
+          }.png" height="15px" width="15px">
+          <img src="./images/star_${
+            course.star >= 2 ? "on" : "off"
+          }.png" height="15px" width="15px">
+          <img src="./images/star_${
+            course.star >= 3 ? "on" : "off"
+          }.png" height="15px" width="15px">
+          <img src="./images/star_${
+            course.star >= 4 ? "on" : "off"
+          }.png" height="15px" width="15px">
+          <img src="./images/star_${
+            course.star >= 5 ? "on" : "off"
+          }.png" height="15px" width="15px">
           </div>
           <p class="text-light ml-3 pt-3">${course.duration}</p>
         </div>
       </div>
     </div>
-    `)
+    `);
   }
 }
 
 function addListeners() {
-  $('#topic_container a').click(function() {
+  $("#topic_container a").click(function () {
     setTopic(this.text);
   });
 
-  $('#sort_by_container a').click(function() {
+  $("#sort_by_container a").click(function () {
     setSort(this.text);
   });
 
-  $('#search_value').change(function() {
-    $('#courses').empty();
+  $("#search_value").change(function () {
+    $("#courses").empty();
     getCourses();
   });
-
 }
 
 function setTopic(text) {
-    $('#courses').empty();
-  $('#topic').text(text);
-  $('#topic').val(snakeCase(text));
+  $("#courses").empty();
+  $("#topic").text(text);
+  $("#topic").val(snakeCase(text));
   getCourses();
 }
 
 function setSort(text) {
-  $('#courses').empty();
-  $('#sort_by').text(text);
-  $('#sort_by').val(snakeCase(text));
+  $("#courses").empty();
+  $("#sort_by").text(text);
+  $("#sort_by").val(snakeCase(text));
   getCourses();
 }
 
 function snakeCase(string) {
-  return string.replace(/\d+/g, ' ')
+  return string
+    .replace(/\d+/g, " ")
     .split(/ |\B(?=[A-Z])/)
     .map((word) => word.toLowerCase())
-    .join('_');
+    .join("_");
 }
