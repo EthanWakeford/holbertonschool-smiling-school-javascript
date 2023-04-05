@@ -2,6 +2,8 @@ $(document).ready(function() {
   loadQuotes();
   loadVideos('popular-tutorials');
   loadVideos('latest-videos');
+  getCourses();
+  addListeners();
 })
 
 function loadQuotes() {
@@ -94,4 +96,72 @@ function placeVideos(data, videoType) {
       <span class="carousel-control-next-icon black"></span>
       <span class="sr-only">Next</span>
     </a>`);
+}
+
+function getCourses() {
+  console.log($('#topic').text())
+  $.ajax({
+    url: 'https://smileschool-api.hbtn.info/courses',
+    method: 'GET',
+    data: {
+      q: $('#search_value').val(),
+      topic: 'novice',
+      sort: $('#sort_by').text()
+    },
+    success: function(response) {
+      console.log(response);
+      createCourses(response.courses)
+    },
+    error: function() {
+      console.log('failed query');
+    }
+  })
+}
+
+function createCourses(courses) {
+  $('#course_count').text(`${courses.length} videos`);
+  for (let course of courses) {
+    $('#courses').append(`
+    <div class="col my-3">
+      <div>
+        <img class="card-img-top" src="${course.thumb_url}" alt="">
+        <img class="card-img-overlay play mx-auto mt-5 p-0" src="images/play.png">
+      </div>
+      <div class="card-body">
+        <h1 class="card-title lead font-weight-bold text-dark">${course.title}</h1>
+        <p class="card-text text-secondary">${course['sub-title']}</p>
+        <div class="row">
+          <img class="rounded-circle ml-3" src="${course.author_pic_url}" height="25px" width="25px" alt="">
+          <p class="ml-3 text-light">${course.author}</p>
+        </div>
+        <div class="row align-items-center justify-content-between px-4">
+          <div class="row">
+          <img src="./images/star_${course.star >= 1 ? 'on' : 'off'}.png" height="15px" width="15px">
+          <img src="./images/star_${course.star >= 2 ? 'on' : 'off'}.png" height="15px" width="15px">
+          <img src="./images/star_${course.star >= 3 ? 'on' : 'off'}.png" height="15px" width="15px">
+          <img src="./images/star_${course.star >= 4 ? 'on' : 'off'}.png" height="15px" width="15px">
+          <img src="./images/star_${course.star >= 5 ? 'on' : 'off'}.png" height="15px" width="15px">
+          </div>
+          <p class="text-light ml-3 pt-3">${course.duration}</p>
+        </div>
+      </div>
+    </div>
+    `)
+  }
+}
+
+function addListeners() {
+  $('#topic_container a').click(function() {
+    console.log(this.text)
+    setTopic(this.text);
+  })
+  $('#search_value').change(function() {
+    $('#courses').empty();
+    getCourses();
+  })
+}
+
+function setTopic(text) {
+  console.log(text);
+  $('#topic').text(`${text}`)
 }

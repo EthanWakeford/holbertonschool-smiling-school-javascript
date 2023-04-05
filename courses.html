@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Coiny&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <script src="scripts.js"></script>
+  <title>Smile School</title>
+</head>
+
+<body>
+
+  <!-- hero====================== -->
+
+  <div class="courses text-white text-center bg-dark pb-5">
+    <nav class="navbar navbar-expand-sm navbar-light mb-5">
+      <div class="container-fluid my-4">
+        <div href="#" class="d-flex flex-column flex-sm-row align-items-center col-sm-6">
+          <img src="images/smile_off.png" alt="smile logo" height="30px" class="mx-2">
+          <img src="images/logo.png" height="30px" alt="Smile School">
+        </div>
+        <button class="navbar-toggler d-sm-none" type="button" data-toggle="collapse" data-target="#navbarNav">
+          <span class="text-white holberton_school-icon-menu"></span>
+        </button>
+        <div class="collapse navbar-collapse d-sm-flex" id="navbarNav">
+          <ul class="navbar-nav flex-sm-row align-items-center ml-auto">
+            <li class="navbar-item">
+              <a href="" class="nav-link text-white">COURSES</a>
+            </li>
+            <li class="navbar-item">
+              <a href="" class="nav-link text-white">PRICING</a>
+            </li>
+            <li class="navbar-item">
+              <a href="" class="nav-link text-white">LOGIN</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="space-lg"></div>
+    <h3 class="font-weight-light">
+      << Don't cry because it's over. <span class="text-light">Smile</span> because it happened. >>
+    </h3>
+
+  </div>
+
+  <!-- Forms Section -->
+  <section class="container-fluid bg-light">
+    <div class="container-lg">
+      <div class="row py-3 text-white">
+        <div class="col-sm-12 col-lg my-3 rounded-top">
+          <p class="mb-2">KEYWORDS</p>
+          <div class="bg-light d-flex flex-row border-bottom border-top-0 border-left-0 border-right-0 rounded-top"
+            style="opacity: .8;">
+            <i style="font-size: 1.75rem; opacity: .8;" class="fas fa-search bg-light py-2 pt-3 pl-3"></i>
+            <input style="outline: none;" class="search border-0 bg-light py-2 pl-4 w-100 text-white"
+              placeholder="Search by keywords" type="text" id="search_value">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg my-3 rounded-top" id="topic_container">
+          <p class="mb-2">TOPIC</p>
+          <div class="dropdown bg-white border-bottom border-top-0 border-left-0 rounded-top">
+            <button style="opacity: .8; color: white; font-size: 1.75rem; font-weight: lighter; box-shadow: 0 0 0 0;"
+              class="btn btn-secondary rounded-0 dropdown-toggle pl-3 d-flex align-items-center justify-content-between w-100 py-2"
+              type="button" id="topic" data-toggle="dropdown" aria-expanded="false" id="topic">Novice<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu w-100" role="menu" aria-labelledby="topic">
+              <li role="topic" class="pl-4"><a role="menuitem" href="#">Novice</a></li>
+              <li role="topic" class="p-3 pl-4"><a role="menuitem" href="#">Intermediate</a></li>
+              <li role="topic" class="pl-4"><a role="menuitem" href="#">Expert</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg my-3 rounded-top">
+          <p class="mb-2">SORT BY</p>
+          <div class="dropdown bg-white border-bottom border-top-0 border-left-0 rounded-top">
+            <button style="opacity: .8; color: white; font-size: 1.75rem; font-weight: lighter; box-shadow: 0 0 0 0;"
+              class="btn btn-secondary rounded-0 dropdown-toggle pl-3 d-flex align-items-center justify-content-between w-100 py-2"
+              type="button" id="sort-by" data-toggle="dropdown" aria-expanded="false" id="sort_by">Most Popular<span
+                class="caret"></span>
+            </button>
+            <ul class="dropdown-menu w-100" role="menu" aria-labelledby="sort-by">
+              <li role="sort-by" class="pl-4"><a role="menuitem" href="#">Most Popular</a></li>
+              <li role="sort-by" class="p-3 pl-4"><a role="menuitem" href="#">Most Recent</a></li>
+              <li role="sort-by" class="pl-4"><a role="menuitem" href="#">Most Viewed</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Videos Results Section -->
+  <section class="container-fluid">
+    <div class="container-lg">
+      <p class="text-muted pt-5" id="course_count"></p>
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md- row-cols-lg-4" id="courses">
+      </div>
+    </div>
+  </section>
+
+  <!-- footer===================================== -->
+
+  <footer class="container-fluid text-white pt-5 bg-dark">
+    <div class="row mx-5">
+      <div class="d-flex align-items-center" href="#">
+        <img src="./images/smile_off.png" alt="smiley logo" height="30px" class="" />
+        <img src="./images/logo.png" alt="logo text" height="30px" class="mt-2 mt-sm-0 mx-3" />
+      </div>
+      <ul class="ml-auto list-inline mt-5">
+        <li class="list-inline-item holberton_school-icon-ic_facebook h3"></li>
+        <li class="list-inline-item holberton_school-icon-ic_twitter h3"></li>
+        <li class="list-inline-item holberton_school-icon-ic_instagram h3"></li>
+      </ul>
+    </div>
+    <p class="text-muted small text-center mt-5">&#169; smileschool 2020</p>
+  </footer>
+</body>
+
+</html>
